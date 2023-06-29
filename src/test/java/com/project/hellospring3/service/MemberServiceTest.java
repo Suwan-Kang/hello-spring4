@@ -2,7 +2,9 @@ package com.project.hellospring3.service;
 
 import com.project.hellospring3.domain.Member;
 import com.project.hellospring3.repository.MemberRepository;
+import com.project.hellospring3.repository.MemoryMemberRepository;
 import com.sun.nio.sctp.Association;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +13,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MemberServiceTest {
-
-    MemberService memberService = new MemberService();
+    MemberService memberService;
+    MemoryMemberRepository memberRepository;
+    @AfterEach
+    public void beforeEach(){
+        memberRepository = new MemoryMemberRepository();
+        memberService = new MemberService(memberRepository);
+    }
+    @AfterEach
+    public void afterEach() {
+        memberRepository.clearStore();
+    }
 
     @Test
     void 회원가입() {
