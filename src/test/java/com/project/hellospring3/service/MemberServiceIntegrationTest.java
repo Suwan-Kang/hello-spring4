@@ -19,7 +19,7 @@ public class MemberServiceIntegrationTest {
     @Autowired MemberRepository memberRepository;
 
     @Test
-    public void 회원가입() throws Exception {
+    public void 회원가입() {
         //Given
         Member member = new Member();
         member.setName("spring");
